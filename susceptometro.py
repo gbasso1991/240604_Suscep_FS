@@ -24,15 +24,15 @@ def lector_ciclos(file):
     
     return f,X,X_2
 
-# %%
-A,B,C=lector_ciclos('AVSF.csv')
-
 #%% Perpendicular
-fig, (ax,ax2) = plt.subplots(nrows=2,figsize=(8,5),constrained_layout=True)
-for file in glob.glob('*P*'):
+fig, (ax,ax2) = plt.subplots(nrows=3,figsize=(8,10),constrained_layout=True)
+for file in glob.glob('**/*P*'):
+    name=file.split('\\')[-1]
     F,X,X_2=lector_ciclos(file)
-    ax.plot(F,X,'.-',label=file.split('.')[0][:])
-    ax2.plot(F,X_2,'.-',label=file.split('.')[0][:])
+    phi=X_2/x
+    ax.plot(F,X,'.-',label=name)
+    ax2.plot(F,X_2,'.-',label=name)
+
     print(file)
 ax.set_ylabel(r'$\chi$')
 ax2.set_ylabel(r'$\chi$"')
@@ -44,10 +44,11 @@ plt.suptitle('Susceptibilidad vs frecuencia - Perpendicular')
 # %%
 #%% Axial
 fig, (ax,ax2) = plt.subplots(nrows=2,figsize=(8,5),constrained_layout=True)
-for file in glob.glob('*A*'):
+for file in glob.glob('**/*A*'):
+    name=file.split('\\')[-1]
     F,X,X_2=lector_ciclos(file)
-    ax.plot(F,X,'.-',label=file.split('.')[0][:])
-    ax2.plot(F,X_2,'.-',label=file.split('.')[0][:])
+    ax.plot(F,X,'.-',label=name)
+    ax2.plot(F,X_2,'.-',label=name)
     print(file)
 ax.set_ylabel(r'$\chi$')
 ax2.set_ylabel(r'$\chi$"')
@@ -58,12 +59,13 @@ for i in [ax,ax2]:
 plt.suptitle('Susceptibilidad vs frecuencia - Axial')
 
 #%% Random
-fig, (ax,ax2) = plt.subplots(nrows=2,figsize=(8,5),constrained_layout=True)
-for file in glob.glob('*R*'):
+fig, (ax,ax2) = plt.subplots(nrows=2,figsize=(8.5,5.5),constrained_layout=True)
+for file in glob.glob('**/*R*'):
+    name=file.split('\\')[-1]
     F,X,X_2=lector_ciclos(file)
-    ax.plot(F,X,'.-',label=file.split('.')[0][:])
-    ax2.plot(F,X_2,'.-',label=file.split('.')[0][:])
-    print(file)
+    ax.plot(F,X,'o-',label=name)
+    ax2.plot(F,X_2,'o-',label=name)
+    print(name)
 ax.set_ylabel(r'$\chi$')
 ax2.set_ylabel(r'$\chi$"')
 for i in [ax,ax2]:
