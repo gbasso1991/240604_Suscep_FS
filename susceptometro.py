@@ -10,7 +10,7 @@ from scipy.interpolate import interp1d
 from uncertainties import ufloat, unumpy 
 import glob
 #%%
-def lector_ciclos(file):
+def lector(file):
     with open(file, 'rb') as f:
         codificacion = chardet.detect(f.read())['encoding']
     data=pd.read_csv(os.path.join(os.getcwd(),file),skiprows=3,
@@ -29,7 +29,7 @@ def lector_ciclos(file):
 fig, (ax,ax2,ax3) = plt.subplots(nrows=3,figsize=(7,8),sharex=True,constrained_layout=True)
 for file in glob.glob('**/*P*'):
     name=file.split('/')[-1][:-4]
-    F,X,X_2=lector_ciclos(file)
+    F,X,X_2=lector(file)
     #phi=X_2/x
     ax.plot(F,X,'o-',label=name)
     ax2.plot(F,X_2,'o-',label=name)
@@ -48,7 +48,7 @@ plt.suptitle('Susceptibilidad vs frecuencia - Perpendicular',fontsize=15)
 fig, (ax,ax2,ax3) = plt.subplots(nrows=3,figsize=(7,8),sharex=True,constrained_layout=True)
 for file in glob.glob('**/*A*'):
     name=file.split('/')[-1][:-4]
-    F,X,X_2=lector_ciclos(file)
+    F,X,X_2=lector(file)
     #phi=X_2/x
     ax.plot(F,X,'o-',label=name)
     ax2.plot(F,X_2,'o-',label=name)
@@ -68,7 +68,7 @@ plt.suptitle('Susceptibilidad vs frecuencia - Axial',fontsize=15)
 fig, (ax,ax2,ax3) = plt.subplots(nrows=3,figsize=(7,8),sharex=True,constrained_layout=True)
 for file in glob.glob('**/*R*'):
     name=file.split('/')[-1][:-4]
-    F,X,X_2=lector_ciclos(file)
+    F,X,X_2=lector(file)
     #phi=X_2/x
     ax.plot(F,X,'o-',label=name)
     ax2.plot(F,X_2,'o-',label=name)
